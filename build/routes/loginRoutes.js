@@ -16,41 +16,41 @@ router.get('/login', (req, res) => {
     res.send(`
     <form method="POST">
       <div>
-        <label>Email</label>
+        <label>Correo Electronico</label>
         <input name="email" />
       </div>
       <div>
-        <label>Password</label>
+        <label>Clave</label>
         <input name="password" type="password" />
       </div>
-      <button>Submit</button>
+      <button>Enviar</button>
     </form>
   `);
 });
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
-    if (email && password && email === 'hi@hi.com' && password === 'password') {
+    if (email && password) {
         req.session = { loggedIn: true };
         res.redirect('/');
     }
     else {
-        res.send('Invalid email or password');
+        res.send('Por favor veirifique su correo');
     }
 });
 router.get('/', (req, res) => {
     if (req.session && req.session.loggedIn) {
         res.send(`
       <div>
-        <div>You are logged in</div>
-        <a href="/logout">Logout</a>
+        <div>Sesion iniciada</div>
+        <a href="/logout">Cerrar sesion</a>
       </div>
     `);
     }
     else {
         res.send(`
       <div>
-        <div>You are not logged in</div>
-        <a href="/login">Login</a>
+        <div>Sesion cerrada</div>
+        <a href="/login">Iniciar sesion</a>
       </div>
     `);
     }
@@ -60,5 +60,5 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 router.get('/protected', requireAuth, (req, res) => {
-    res.send('Welcome to protected route, logged in user');
+    res.send('Bienvenido al area protegida');
 });

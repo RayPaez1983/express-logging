@@ -67,7 +67,7 @@ router.get('/logout', (req: Request, res: Response) => {
 });
 
 router.get('/protected', requireAuth, (req: Request, res: Response) => {
-  res.send('Welcome to protected route, logged in user');
+  res.send('Bienvenido al area protegida');
 });
 
 export { router };
